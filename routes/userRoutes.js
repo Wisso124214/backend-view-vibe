@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { config } from './config.js';
+import { config } from './config.js';
 
 export const createUserRoutes = (app) => {
   // app.get('/test-db', async (req, resp) => {
