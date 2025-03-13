@@ -22,8 +22,7 @@ createMovieRoutes(app);
 // })
 // .catch((err) => {
 //   console.log('error posting', JSON.stringify(err, null, 2));
-// }) hola mundo
-//hello 
+// })
 
 axios.get(SERVER_URL+'/get-genres')
 .then((res)=>{
