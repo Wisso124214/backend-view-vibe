@@ -15,9 +15,7 @@ export const createMovieRoutes = (app) => {
 
   app.post('/post-genre', async (req, res) => {
 
-    const genre = JSON.stringify(req.body.data);
-
-    axios.post(`${SERVER_URL}/genre`, { genre: genre, })
+    axios.post(`${SERVER_URL}/genre`, req.body)
       .then((response) => {
         res.json(response.data);
       })
