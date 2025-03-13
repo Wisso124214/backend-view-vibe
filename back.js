@@ -1,15 +1,19 @@
+import axios from "axios";
+import { SERVER_URL } from "./config.js";
+
 import app from "./middleware.js";
 import { dbConnection } from "./db.js";
 import { createUserControllers } from "./controllers/userController.js";
 import { createUserRoutes } from "./routes/userRoutes.js";
-import { createRecipeControllers } from "./controllers/recipeController.js";
-import { createRecipeRoutes } from "./routes/recipeRoutes.js";
+import { createMovieControllers } from "./controllers/movieController.js";
+import { createMovieRoutes } from "./routes/movieRoutes.js";
 
 dbConnection(app);
 
 createUserControllers(app);
 createUserRoutes(app);
 
-createRecipeControllers(app);
-createRecipeRoutes(app);
+createMovieControllers(app);
+createMovieRoutes(app);
 
+axios.post (SERVER_URL+'/post-genre', {title: "+18"})
