@@ -16,4 +16,10 @@ createUserRoutes(app);
 createMovieControllers(app);
 createMovieRoutes(app);
 
-axios.post (SERVER_URL+'/post-genre', {title: "+18"})
+axios.post(SERVER_URL+'/post-genre', {title: "+19"})
+.then((res) => {
+  console.log('posted');
+})
+.catch((err) => {
+  console.log('error posting', JSON.stringify(err, null, 2));
+})
