@@ -16,10 +16,18 @@ createUserRoutes(app);
 createMovieControllers(app);
 createMovieRoutes(app);
 
-axios.post(SERVER_URL+'/post-genre', {title: "+19"})
-.then((res) => {
-  console.log('posted');
+// axios.post(SERVER_URL+'/post-genre', {title: "+19"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
+
+axios.get(SERVER_URL+'/get-genres')
+.then((res)=>{
+  console.log(res.data)
 })
-.catch((err) => {
-  console.log('error posting', JSON.stringify(err, null, 2));
+.catch((err)=>{
+  console.log(err)
 })
