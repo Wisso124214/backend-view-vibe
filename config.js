@@ -7,3 +7,6 @@ export const config = {
   }
   
   export const SERVER_URL = ${config.PROTOCOL}://${config.SERVER_IP}:${config.PORT};
+
+
+  //
