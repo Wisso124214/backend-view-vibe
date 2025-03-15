@@ -44,11 +44,12 @@ export const createMovieControllers = (app) => {
       console.log(JSON.stringify(error, null, 2));
     }
   });
+///////////////////////////////////////////////////////
 
-
+  
   app.get('/ages', async (req, res) => {
     try {
-      const ages = await Genre.find();
+      const ages = await Age.find();
       res.json(ages);
     } catch (error) {
       res.status(403).json({ message: error.message });
@@ -88,6 +89,54 @@ export const createMovieControllers = (app) => {
       console.log(JSON.stringify(error, null, 2));
     }
   });
+
+///////////////////////////////////////////////
+
+app.get('/actors', async (req, res) => {
+  try {
+    const actors = await Actor.find();
+    res.json(actors);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.post('/actor', async (req, res) => {
+  try {
+    const actor = new Actor(req.body);
+    await actor.save();
+    res.json(actor);
+  } catch (error) {
+    res.status(402).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.put('/actor/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const actor = await Actor.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(actor);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.delete('/actor/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Actor.findByIdAndDelete(id);
+    res.json({ message: 'Actor deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
 }
+
+
 
 

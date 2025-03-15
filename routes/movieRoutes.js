@@ -47,4 +47,30 @@ export const createMovieRoutes = (app) => {
         console.log(JSON.stringify(error, null, 2));
       });
   });
+
+  app.get('/get-actors', async (req, res) => {
+    axios.get(`${SERVER_URL}/actors`)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+  app.post('/post-actor', async (req, res) => {
+
+    axios.post(`${SERVER_URL}/actor`, req.body)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(402).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+
+
 }
