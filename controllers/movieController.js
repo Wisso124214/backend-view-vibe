@@ -1,5 +1,7 @@
 import { Genre } from '../models/movieModels.js';
 import { Age } from '../models/movieModels.js';
+import { Actor } from '../models/movieModels.js';
+
 
 export const createMovieControllers = (app) => {
   app.get('/genres', async (req, res) => {
@@ -134,6 +136,12 @@ app.delete('/actor/:id', async (req, res) => {
     console.log(JSON.stringify(error, null, 2));
   }
 });
+
+//////////////////////////////////////////////////
+
+
+
+
 
 }
 

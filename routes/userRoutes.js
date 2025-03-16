@@ -1,7 +1,29 @@
 import axios from 'axios';
-import { config } from '../config.js';
+import { SERVER_URL } from '../config.js';
 
 export const createUserRoutes = (app) => {
+
+  app.get('/get-contacts', async (req, res) => {
+    axios.get(`${SERVER_URL}/contacts`)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+  app.post('/post-contact', async (req, res) => {
+    axios.post(`${SERVER_URL}/contact`, req.body)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(402).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
   // app.get('/test-db', async (req, resp) => {
   //   //Evaluar permisos asd
   //   axios.post(`${SERVER_URL}/session`,

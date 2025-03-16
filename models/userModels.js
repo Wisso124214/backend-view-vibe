@@ -17,7 +17,7 @@ const sessionSchema = new mongoose.Schema({
 });
 
 const contactSchema = new mongoose.Schema({
-  email: String,
+  contact: String,
 });
 
 

@@ -24,13 +24,29 @@ createMovieRoutes(app);
 //   console.log('error posting', JSON.stringify(err, null, 2));
 // })
 
-axios.post(SERVER_URL+'/post-age', {title: "+18", description: "contenido para mayores de 18 años"})
+// axios.post(SERVER_URL+'/post-age', {title: "+18", description: "contenido para mayores de 18 años"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
+
+// axios.post(SERVER_URL+'/post-actor', {name: "Tom Cruise"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
+
+axios.post(SERVER_URL+'/post-contact', {contact: "Miguel2025"})
 .then((res) => {
   console.log('posted');
 })
 .catch((err) => {
   console.log('error posting', JSON.stringify(err, null, 2));
-})
+  })
 
 // axios.get(SERVER_URL+'/get-ages')
 // .then((res)=>{
