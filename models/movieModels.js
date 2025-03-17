@@ -11,7 +11,14 @@ const ageSchema = new mongoose.Schema({
 
 const actorSchema = new mongoose.Schema({
   name: String,
-  //image: String,
+  image: String,
+});
+
+const movieSchema = new mongoose.Schema({
+  title: String,
+  synopsis: String,
+  publish_date: Date,
+  cover_image: String,
 });
 
 
@@ -19,4 +26,5 @@ const actorSchema = new mongoose.Schema({
 export const Genre = mongoose.model("Genre", genreSchema);
 export const Age = mongoose.model("Age", ageSchema);
 export const Actor = mongoose.model("Actor", actorSchema);
+export const Movie = mongoose.model("Movie", movieSchema);
 

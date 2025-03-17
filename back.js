@@ -32,7 +32,7 @@ createMovieRoutes(app);
 //   console.log('error posting', JSON.stringify(err, null, 2));
 // })
 
-// axios.post(SERVER_URL+'/post-actor', {name: "Tom Cruise"})
+// axios.post(SERVER_URL+'/post-actor', {name: "Tom hanks", image: ""})
 // .then((res) => {
 //   console.log('posted');
 // })
@@ -40,21 +40,51 @@ createMovieRoutes(app);
 //   console.log('error posting', JSON.stringify(err, null, 2));
 // })
 
-axios.post(SERVER_URL+'/post-contact', {contact: "Miguel2025"})
-.then((res) => {
-  console.log('posted');
-})
-.catch((err) => {
-  console.log('error posting', JSON.stringify(err, null, 2));
-  })
+// axios.put(SERVER_URL+'/update-actor/67d7783fce9bf2cb1cef431f', {name: "Tom Hanks", image: "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_.jpg"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
 
-// axios.get(SERVER_URL+'/get-ages')
+// axios.delete(SERVER_URL+'/delete-actor/67d750bd0e678c258e1de853')
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
+
+// axios.post(SERVER_URL+'/post-contact', {contact: "Miguel2025"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+//   })
+
+// axios.get(SERVER_URL+'/get-actors')
 // .then((res)=>{
-//   console.log(res.data)
+//   for (let d of res.data){
+//     if (d.name === "Tom Hanks"){
+//       console.log(d)
+//       axios.delete(SERVER_URL+'/delete-actor/'+d._id)
+//     }
+//   }
 // })
 // .catch((err)=>{
 //   console.log(err)
 // })
+
+// axios.get(SERVER_URL+'/get-actors')
+// .then((res)=>{
+//   if (res.data.length === 2){
+//     axios.post(SERVER_URL+'/post-actor', {name: "Tom Hanks", image: "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_.jpg"})
+//   }
+// })
+
+
 
 // axios.get(SERVER_URL+'/get-genres')
 // .then((res)=>{
@@ -63,3 +93,20 @@ axios.post(SERVER_URL+'/post-contact', {contact: "Miguel2025"})
 // .catch((err)=>{
 //   console.log(err)
 // })
+
+axios.get(SERVER_URL+'/get-actors')
+.then((res)=>{
+  let name = "Mark Ruffalo";
+  let found = false;
+  for (let d of res.data){
+    if (d.name === name){
+      found = true;
+    }
+}
+if (found === false){
+  axios.post(SERVER_URL+'/post-actor', {name: "Mark Ruffalo", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjB4lE2en8edlY0WeVQm70ccncCZyP6IXLrg&s"})
+}
+})
+.catch((err)=>{
+  console.log(err)
+})
