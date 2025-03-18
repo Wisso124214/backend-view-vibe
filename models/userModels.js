@@ -1,3 +1,4 @@
+import { Int32 } from 'mongodb';
 import mongoose from 'mongoose';
 
 
@@ -19,6 +20,8 @@ const sessionSchema = new mongoose.Schema({
 const contactSchema = new mongoose.Schema({
   contact: String,
 });
+
+
 
 
 export const Contact = mongoose.model('Contact', contactSchema);

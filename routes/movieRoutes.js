@@ -240,6 +240,54 @@ app.delete('/delete-movie_actor/:id', async (req, res) => {
       console.log(JSON.stringify(error, null, 2));
     });
   })
+////////////////////////////////////////////////////
+
+app.get('/get-comments', async (req, res) => {
+  axios.get(`${SERVER_URL}/comments`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(500).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+});
+
+app.post('/post-comment', async (req, res) => {
+
+  axios.post(`${SERVER_URL}/comment`, req.body)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(402).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+});
+
+
+
+app.put('/update-comment/:id', async (req, res) => {
+axios.put(`${SERVER_URL}/comment/${req.params.id}`, req.body)
+  .then((response) => {
+    res.json(response.data);
+  })
+  .catch((error) => {
+    res.status(405).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  });
+})
+
+app.delete('/delete-comment/:id', async (req, res) => {
+axios.delete(`${SERVER_URL}/comment/${req.params.id}`)
+  .then((response) => {
+    res.json(response.data);
+  })
+  .catch((error) => {
+    res.status(406).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  });
+})
 
 
 }

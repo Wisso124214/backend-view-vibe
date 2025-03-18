@@ -230,6 +230,50 @@ app.delete('/movie_actor/:id', async (req, res) => {
   }
 });
 
+/////////////////////////////////////////////////
+
+app.get('/comments', async (req, res) => {
+  try {
+    const comments = await Comment.find();
+    res.json(comments);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.post('/comment', async (req, res) => {
+  try {
+    const comment = new Comment(req.body);
+    await comment.save();
+    res.json(comment);
+  } catch (error) {
+    res.status(402).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.put('/comment/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const comment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(comment);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.delete('/comment/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Comment.findByIdAndDelete(id);
+    res.json({ message: 'Comment deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
 
 }
 

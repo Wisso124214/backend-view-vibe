@@ -29,11 +29,22 @@ const movie_actorSchema = new mongoose.Schema({
   id_movie: Int32,
 });
 
+const commentSchema = new mongoose.Schema({
+  id_user: Int32,
+  id_movie: Int32,
+  content: String,
+  publish_date: Date,
+  id_parent_comment: Int32,
+  users_liked: Array,
+
+});
+
 
 
 export const Genre = mongoose.model("Genre", genreSchema);
 export const Age = mongoose.model("Age", ageSchema);
 export const Actor = mongoose.model("Actor", actorSchema);
 export const Movie = mongoose.model("Movie", movieSchema);
-export const Movie_Actor = mongoose.model("Movie_Actor", movieSchema);
+export const Movie_Actor = mongoose.model("Movie_Actor", movie_actorSchema);
+export const Comment = mongoose.model('Comment', commentSchema);
 

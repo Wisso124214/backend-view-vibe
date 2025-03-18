@@ -145,4 +145,6 @@ export const createUserControllers = (app) => {
       console.log(JSON.stringify(error, null, 2));
     }
   });
+
+  
 }
