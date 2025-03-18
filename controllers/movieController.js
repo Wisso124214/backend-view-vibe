@@ -1,6 +1,8 @@
 import { Genre } from '../models/movieModels.js';
 import { Age } from '../models/movieModels.js';
 import { Actor } from '../models/movieModels.js';
+import { Movie } from '../models/movieModels.js';
+import { Movie_Actor } from '../models/movieModels.js';
 
 
 export const createMovieControllers = (app) => {
@@ -137,10 +139,96 @@ app.delete('/actor/:id', async (req, res) => {
   }
 });
 
-//////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////
 
+app.get('/movies', async (req, res) => {
+  try {
+    const movies = await Movie.find();
+    res.json(movies);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
 
+app.post('/movie', async (req, res) => {
+  try {
+    const movie = new Movie(req.body);
+    await movie.save();
+    res.json(movie);
+  } catch (error) {
+    res.status(402).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.put('/movie/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const movie = await Movie.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(movie);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.delete('/movie/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Movie.findByIdAndDelete(id);
+    res.json({ message: 'Movie deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+///////////////////////////////////////////////////////////
+
+app.get('/movies_actors', async (req, res) => {
+  try {
+    const movies_actors = await Movie_Actor.find();
+    res.json(movies_actors);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.post('/movie_actor', async (req, res) => {
+  try {
+    const movie_actor = new Movie_Actor(req.body);
+    await movie_actor.save();
+    res.json(movie_actor);
+  } catch (error) {
+    res.status(402).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.put('/movie_actor/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const movie_actor = await Movie_Actor.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(movie_actor);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.delete('/movie_actor/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Movie_Actor.findByIdAndDelete(id);
+    res.json({ message: 'movie_actor deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
 
 
 }

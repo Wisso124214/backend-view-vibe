@@ -24,6 +24,28 @@ export const createUserRoutes = (app) => {
         console.log(JSON.stringify(error, null, 2));
       });
   });
+
+  app.put('/update-contact/:id', async (req, res) => {
+    axios.put(`${SERVER_URL}/contact/${req.params.id}`, req.body)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(405).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+    })
+  
+  app.delete('/delete-contact/:id', async (req, res) => {
+    axios.delete(`${SERVER_URL}/contact/${req.params.id}`)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(406).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+    })
   // app.get('/test-db', async (req, resp) => {
   //   //Evaluar permisos asd
   //   axios.post(`${SERVER_URL}/session`,

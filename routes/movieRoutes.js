@@ -142,8 +142,104 @@ app.delete('/delete-actor/:id', async (req, res) => {
       console.log(JSON.stringify(error, null, 2));
     });
   })
-  
 
+  ////////////////////////////////////////////////
+
+  app.get('/get-movies', async (req, res) => {
+    axios.get(`${SERVER_URL}/movies`)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+  app.post('/post-movie', async (req, res) => {
+
+    axios.post(`${SERVER_URL}/movie`, req.body)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(402).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+
+
+app.put('/update-movie/:id', async (req, res) => {
+  axios.put(`${SERVER_URL}/movie/${req.params.id}`, req.body)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(405).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+  })
+
+app.delete('/delete-movie/:id', async (req, res) => {
+  axios.delete(`${SERVER_URL}/movie/${req.params.id}`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(406).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+  })
+
+  ////////////////////////////////////////////////////
+  
+  app.get('/get-movies_actors', async (req, res) => {
+    axios.get(`${SERVER_URL}/movies_actors`)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(500).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+  app.post('/post-movie_actor', async (req, res) => {
+
+    axios.post(`${SERVER_URL}/movie_actor`, req.body)
+      .then((response) => {
+        res.json(response.data);
+      })
+      .catch((error) => {
+        res.status(402).json({ message: error.message });
+        console.log(JSON.stringify(error, null, 2));
+      });
+  });
+
+
+
+app.put('/update-movie_actor/:id', async (req, res) => {
+  axios.put(`${SERVER_URL}/movie_actor/${req.params.id}`, req.body)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(405).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+  })
+
+app.delete('/delete-movie_actor/:id', async (req, res) => {
+  axios.delete(`${SERVER_URL}/movie_actor/${req.params.id}`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(406).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+  })
 
 
 }
