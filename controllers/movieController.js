@@ -3,6 +3,7 @@ import { Age } from '../models/movieModels.js';
 import { Actor } from '../models/movieModels.js';
 import { Movie } from '../models/movieModels.js';
 import { Movie_Actor } from '../models/movieModels.js';
+import { Comment } from '../models/movieModels.js';
 
 
 export const createMovieControllers = (app) => {
