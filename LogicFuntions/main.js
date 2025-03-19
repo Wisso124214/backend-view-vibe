@@ -1,6 +1,5 @@
 import bcrypt from 'react-native-bcrypt';
-import { ToastAndroid } from 'react-native';
-import { getAndroidId, getIosIdForVendorAsync } from 'expo-application';
+// import { getAndroidId, getIosIdForVendorAsync } from 'expo-application';
 import axios from 'axios';
 import { SERVER_URL } from '../config/config';
 
@@ -28,13 +27,13 @@ export const closeSession = async (setStrPage, setIdMainSession, idMainSession) 
     .then(async () => {
       setIdMainSession('');
       setStrPage('login');
-      ToastAndroid.showWithGravityAndOffset('Session closed', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50, );
+      console.log('Session closed');
     })
     .catch((error) => {
       handleError(error, 'Error closing session');
     })
   } else {
-    ToastAndroid.showWithGravityAndOffset('We does not found an open session', ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50, );
+    console.log('We does not found an open session');
   }
 }
 
@@ -60,7 +59,7 @@ export const createSession = async (id_user) => {
 export const getIdSession = async (id_user) => {
   
   let strId = '';
-  const id_device = getAndroidId() || getIosIdForVendorAsync();
+  // const id_device = getAndroidId() || getIosIdForVendorAsync();
 
   await axios.get(`${SERVER_URL}/sessions`, { params: {
     id_user: id_user,
@@ -84,7 +83,7 @@ export const getIdSession = async (id_user) => {
 export const setSession = async (id_user, state, id_session) => {
   
   let strId = '';
-  const id_device = getAndroidId() || getIosIdForVendorAsync();
+  // const id_device = getAndroidId() || getIosIdForVendorAsync();
 
   const date_4 = new Date();  //-4 GMT
   date_4.setHours(date_4.getHours() - 4);
@@ -163,7 +162,7 @@ export const getIdContact = async (email) => {
 export const saveDataRegister = async (username, password, email, data) => {
 
   const id_contact = await getIdContact(email);
-  const id_device = getAndroidId() || getIosIdForVendorAsync()
+  // const id_device = getAndroidId() || getIosIdForVendorAsync()
 
   const { setIsKeyboardVisible, setListUsernames, listUsernames, setLoading, mode, theme, methods } = data
   
@@ -212,5 +211,5 @@ export const saveDataRegister = async (username, password, email, data) => {
 
 export const handleError = (error, errString) => {
   console.log(JSON.stringify(error, null, 2), errString);
-  ToastAndroid.showWithGravityAndOffset(errString, ToastAndroid.LONG, ToastAndroid.BOTTOM, 25, 50, );
+  console.log(errString);
 }
