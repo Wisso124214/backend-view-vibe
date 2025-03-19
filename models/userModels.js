@@ -3,17 +3,19 @@ import mongoose from 'mongoose';
 
 
 const userSchema = new mongoose.Schema({
+  id_email: String,
+  id_session: String,
+  name: String,
   username: String,
   password: String,
-  id_contact: String,
-  id_recipe: String,
-  id_device: String,
+  register_date: Date,
+  is_critical: Boolean,
 });
 
 const sessionSchema = new mongoose.Schema({
   id_device: String,
   id_user: String,
-  state: String,    //open or closed
+  session_state: String,    //open or closed
   date: Date,
 });
 
