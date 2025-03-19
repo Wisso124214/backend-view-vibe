@@ -4,6 +4,7 @@ import { Actor } from '../models/movieModels.js';
 import { Movie } from '../models/movieModels.js';
 import { Movie_Actor } from '../models/movieModels.js';
 import { Comment } from '../models/movieModels.js';
+import { Rating } from '../models/movieModels.js';
 
 
 export const createMovieControllers = (app) => {
@@ -270,6 +271,51 @@ app.delete('/comment/:id', async (req, res) => {
     const { id } = req.params;
     await Comment.findByIdAndDelete(id);
     res.json({ message: 'Comment deleted' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+/////////////////////////////////////////////////
+
+app.get('/ratings', async (req, res) => {
+  try {
+    const ratings = await Rating.find();
+    res.json(ratings);
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.post('/rating', async (req, res) => {
+  try {
+    const rating = new Rating(req.body);
+    await rating.save();
+    res.json(rating);
+  } catch (error) {
+    res.status(402).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.put('/rating/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const rating = await Rating.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(rating);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  }
+});
+
+app.delete('/rating/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Rating.findByIdAndDelete(id);
+    res.json({ message: 'Rating deleted' });
   } catch (error) {
     res.status(500).json({ message: error.message });
     console.log(JSON.stringify(error, null, 2));

@@ -289,5 +289,54 @@ axios.delete(`${SERVER_URL}/comment/${req.params.id}`)
   });
 })
 
+//////////////////////////////////////////////
+
+app.get('/get-ratings', async (req, res) => {
+  axios.get(`${SERVER_URL}/ratings`)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(500).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+});
+
+app.post('/post-rating', async (req, res) => {
+
+  axios.post(`${SERVER_URL}/rating`, req.body)
+    .then((response) => {
+      res.json(response.data);
+    })
+    .catch((error) => {
+      res.status(402).json({ message: error.message });
+      console.log(JSON.stringify(error, null, 2));
+    });
+});
+
+
+
+app.put('/update-rating/:id', async (req, res) => {
+axios.put(`${SERVER_URL}/rating/${req.params.id}`, req.body)
+  .then((response) => {
+    res.json(response.data);
+  })
+  .catch((error) => {
+    res.status(405).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  });
+})
+
+app.delete('/delete-rating/:id', async (req, res) => {
+axios.delete(`${SERVER_URL}/rating/${req.params.id}`)
+  .then((response) => {
+    res.json(response.data);
+  })
+  .catch((error) => {
+    res.status(406).json({ message: error.message });
+    console.log(JSON.stringify(error, null, 2));
+  });
+})
+
 
 }

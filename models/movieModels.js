@@ -39,6 +39,13 @@ const commentSchema = new mongoose.Schema({
 
 });
 
+const ratingSchema = new mongoose.Schema({
+  id_user: Int32,
+  id_movie: Int32,
+  rating: Number,
+  publish_date: Date,
+});
+
 
 
 export const Genre = mongoose.model("Genre", genreSchema);
@@ -47,4 +54,5 @@ export const Actor = mongoose.model("Actor", actorSchema);
 export const Movie = mongoose.model("Movie", movieSchema);
 export const Movie_Actor = mongoose.model("Movie_Actor", movie_actorSchema);
 export const Comment = mongoose.model('Comment', commentSchema);
+export const Rating = mongoose.model('Rating', ratingSchema);
 
