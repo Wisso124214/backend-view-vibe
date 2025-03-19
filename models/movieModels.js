@@ -22,6 +22,7 @@ const movieSchema = new mongoose.Schema({
   synopsis: String,
   publish_date: Date,
   cover_image: String,
+  cast: Array,
 });
 
 const movie_actorSchema = new mongoose.Schema({
