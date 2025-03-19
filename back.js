@@ -8,7 +8,7 @@ import { createUserRoutes } from "./routes/userRoutes.js";
 import { createMovieControllers } from "./controllers/movieController.js";
 import { createMovieRoutes } from "./routes/movieRoutes.js";
 
-import { encryptData } from "./LogicFuntions/main.js";
+import { encryptData } from "./LogicFuntions/logicSession.js";
 
 // getIdDevice().then((id) => {
 //   console.log(id);
