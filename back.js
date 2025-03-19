@@ -8,6 +8,15 @@ import { createUserRoutes } from "./routes/userRoutes.js";
 import { createMovieControllers } from "./controllers/movieController.js";
 import { createMovieRoutes } from "./routes/movieRoutes.js";
 
+import { encryptData } from "./LogicFuntions/main.js";
+
+// getIdDevice().then((id) => {
+//   console.log(id);
+// });
+
+// encryptData("data");
+
+
 dbConnection(app);
 
 createUserControllers(app);
@@ -48,13 +57,13 @@ createMovieRoutes(app);
 //   console.log('error posting', JSON.stringify(err, null, 2));
 // })
 
-axios.post(SERVER_URL+'/post-movie_actor', {id_age: "56552", id_movie: "87456"})
-.then((res) => {
-  console.log('posted');
-})
-.catch((err) => {
-  console.log('error posting', JSON.stringify(err, null, 2));
-})
+// axios.post(SERVER_URL+'/post-movie_actor', {id_age: "56552", id_movie: "87456"})
+// .then((res) => {
+//   console.log('posted');
+// })
+// .catch((err) => {
+//   console.log('error posting', JSON.stringify(err, null, 2));
+// })
 
 // axios.put(SERVER_URL+'/update-actor/67d7783fce9bf2cb1cef431f', {name: "Tom Hanks", image: "https://m.media-amazon.com/images/M/MV5BMTQ2MjMwNDA3Nl5BMl5BanBnXkFtZTcwMTA2NDY3NQ@@._V1_.jpg"})
 // .then((res) => {

@@ -1,6 +1,4 @@
-import { Int32 } from 'mongodb';
 import mongoose from 'mongoose';
-
 
 const userSchema = new mongoose.Schema({
   id_email: String,
