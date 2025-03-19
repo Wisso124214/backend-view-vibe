@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "../config.js";
+import cryptlib from "cryptlib";
 
 // Función para cerrar sesión
 export const closeSession = async (
@@ -108,3 +109,14 @@ export const closeSession = async (
     }
     return strId; // Devuelve el ID de la sesión
   };
+
+  // Función para cifrar datos
+export async function encryptData(data) {
+    // Genera un IV (vector de inicialización) aleatorio de 16 bytes
+    const iv = cryptlib.generateRandomIV(16);
+    // Genera una clave hash SHA-256 de longitud 32 bytes
+    const key = cryptlib.getHashSha256('1029jh01d3n9ioqwuhr97823h', 32);
+    // Cifra los datos usando la clave y el IV
+    const encryptedData = cryptlib.encrypt(data, key, iv);
+    return encryptedData; // Devuelve los datos cifrados
+  }
