@@ -120,3 +120,119 @@ export async function encryptData(data) {
     const encryptedData = cryptlib.encrypt(data, key, iv);
     return encryptedData; // Devuelve los datos cifrados
   }
+
+  // Función para obtener una lista de nombres de usuario
+export async function getListUsernames(setListUsernames, username) {
+  await axios
+    .get(`${SERVER_URL}/users`, { params: { username: username } }) // Solicita usuarios al servidor
+    .then(async (res) => {
+      let arr = [];
+      // Itera sobre los datos recibidos y extrae los nombres de usuario
+      await res.data.forEach((objusername) => {
+        arr.push(objusername.username);
+      });
+      setListUsernames(arr); // Actualiza la lista de nombres de usuario
+    })
+    .catch((error) => {
+      handleError(error, "Error getting users"); // Maneja errores
+    });
+}
+
+// Función para obtener el ID de un usuario
+export const getIdUser = async (username) => {
+  let id = "";
+
+  await axios
+    .get(`${SERVER_URL}/users`, { params: { username: username } }) // Solicita usuarios al servidor
+    .then(async (res) => {
+      await res.data.forEach((objuser) => {
+        // Busca un usuario que coincida con el nombre de usuario
+        if (objuser.username === username && id === "") {
+          id = objuser._id; // Asigna el ID del usuario
+        }
+      });
+    })
+    .catch((error) => {
+      handleError(error, "Error getting users"); // Maneja errores
+    });
+  return id; // Devuelve el ID del usuario
+};
+
+// Función para obtener el ID de un contacto
+export const getIdContact = async (email) => {
+  let id = "";
+
+  await axios
+    .get(`${SERVER_URL}/contacts`, { params: { email: email } }) // Solicita contactos al servidor
+    .then(async (res) => {
+      await res.data.forEach((objcontact) => {
+        // Busca un contacto que coincida con el correo electrónico
+        if (objcontact.email === email && id === "") {
+          id = objcontact._id; // Asigna el ID del contacto
+        }
+      });
+
+      if (id === "") { // Si no se encuentra el contacto, lo crea
+        await axios
+          .post(`${SERVER_URL}/contact`, {
+            email: email, // Crea un nuevo contacto con el correo electrónico
+          })
+          .catch((error) => {
+            handleError(error, "Error getting contacts"); // Maneja errores
+          });
+        id = await getIdContact(email); // Vuelve a buscar el ID del contacto
+      }
+    })
+    .catch((error) => {
+      handleError(error, "Error getting contacts"); // Maneja errores
+    });
+  return id; // Devuelve el ID del contacto
+};
+
+// Función para guardar datos de registro
+export const saveDataRegister = async (username, password, email, data) => {
+  const id_contact = await getIdContact(email); // Obtiene el ID del contacto
+
+  const {
+    setIsKeyboardVisible, // Función para ocultar el teclado
+    setListUsernames, // Función para actualizar la lista de nombres de usuario
+    listUsernames, // Lista actual de nombres de usuario
+    setLoading, // Función para actualizar el estado de carga
+    mode, // Modo de la aplicación
+    theme, // Tema de la aplicación
+    methods, // Métodos adicionales
+  } = data;
+
+  setIsKeyboardVisible(false); // Oculta el teclado
+
+  setListUsernames([...listUsernames, username]); // Agrega el nuevo nombre de usuario a la lista
+
+  const hashedPassword = await encryptData(password); // Cifra la contraseña
+
+  await axios
+    .post(`${SERVER_URL}/user`, {
+      // id_device: id_device, // ID del dispositivo
+      username: username, // Nombre de usuario
+      password: hashedPassword, // Contraseña cifrada
+      id_contact: id_contact, // ID del contacto
+    })
+    .then(async (objuser) => {
+      createSession(objuser.data._id) // Crea una sesión para el usuario
+        .then(async (id_session) => {
+          methods.setIdMainSession(id_session); // Establece el ID de la sesión principal
+        })
+        .catch((error) => {
+          methods.setLoading(false); // Detiene el estado de carga
+          handleError(error, "Error Registering"); // Maneja errores
+        });
+    })
+    .catch((error) => {
+      methods.setLoading(false); // Detiene el estado de carga
+      handleError(error, "Error Registering"); // Maneja errores
+    });
+};
+
+// Función para manejar errores
+export const handleError = (error, errString) => {
+  console.log(errString); // Muestra el mensaje de error
+};

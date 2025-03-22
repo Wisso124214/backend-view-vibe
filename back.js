@@ -8,7 +8,7 @@ import { createUserRoutes } from "./routes/userRoutes.js";
 import { createMovieControllers } from "./controllers/movieController.js";
 import { createMovieRoutes } from "./routes/movieRoutes.js";
 
-import { encryptData } from "./LogicFuntions/logicSession.js";
+import { encryptData } from "./logicFuntions/main.js";
 
 // getIdDevice().then((id) => {
 //   console.log(id);
@@ -24,6 +24,30 @@ createUserRoutes(app);
 
 createMovieControllers(app);
 createMovieRoutes(app);
+
+const url = 'https://api.themoviedb.org/3/movie/popular?api_key=7917d74e7d96c5b9e2dadb0f13566b9a&language=en-US';
+let page = 1;
+let segmentList = [];
+
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTE3ZDc0ZTdkOTZjNWI5ZTJkYWRiMGYxMzU2NmI5YSIsIm5iZiI6MTc0MTM5MTQxMS4zMDMsInN1YiI6IjY3Y2I4NjMzYTRkZjk3ZGI5NjRmNjg3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eGIHpPLr1waotJ5nHWUTMIqqt4fKA3JGGkc9lq75wLs'
+  },
+  signal: AbortSignal.timeout(5000),
+};
+
+await fetch(`${url}&page=${page}`, options)
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data.results)
+    // segmentList = segmentList.concat(data.results);
+    // page++;
+  })
+  .catch((err) => {
+    console.error(err)
+  });
 
 // axios.post(SERVER_URL+'/post-genre', {title: "+19"})
 // .then((res) => {
