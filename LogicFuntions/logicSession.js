@@ -111,7 +111,7 @@ export const closeSession = async (
   };
 
   // Función para cifrar datos
-export async function encryptData(data) {
+export function encryptData(data) {
     // Genera un IV (vector de inicialización) aleatorio de 16 bytes
     const iv = cryptlib.generateRandomIV(16);
     // Genera una clave hash SHA-256 de longitud 32 bytes

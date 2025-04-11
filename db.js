@@ -3,7 +3,7 @@ import { config } from './config.js';
 
 const { DB_URL, PORT } = config;
 
-export const dbConnection = (app) => {
+export const dbConnection = async (app) => {
   mongoose.connect(DB_URL)
   .then(() => {
     app.listen(PORT, () => {

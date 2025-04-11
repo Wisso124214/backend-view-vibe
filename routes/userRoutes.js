@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { SERVER_URL } from '../config.js';
 
-export const createUserRoutes = (app) => {
+export const createUserRoutes = async (app) => {
 
   app.get('/get-contacts', async (req, res) => {
     axios.get(`${SERVER_URL}/contacts`)

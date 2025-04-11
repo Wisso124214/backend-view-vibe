@@ -4,7 +4,7 @@ import { Contact, Session, User } from '../models/userModels.js';
 /********/
 //Contact
 /********/
-export const createUserControllers = (app) => {  
+export const createUserControllers = async (app) => {  
   app.get('/contacts', async (req, res) => {
     try {
       const contacts = await Contact.find();
