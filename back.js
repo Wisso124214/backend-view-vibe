@@ -123,9 +123,6 @@ dbConnection(app)
       for (let a of ages) {
         await axios
           .post(SERVER_URL + '/post-age', a)
-          .then((res) => {
-            console.log('age posted');
-          })
           .catch((err) => {
             console.log('error posting age', JSON.stringify(err, null, 2));
           });

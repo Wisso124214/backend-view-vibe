@@ -448,7 +448,6 @@ export const createMovieRoutes = async (app) => {
         results: page.map((m) => m._id),
       });
     }
-    console.log('Paginations created');
     const response = await axios.get(SERVER_URL + '/paginations');
 
     res.json(response.data);
@@ -459,7 +458,6 @@ export const createMovieRoutes = async (app) => {
       .get(`${SERVER_URL}/paginations`)
       .then(async (response) => {
         if (response.data.length === 0) {
-          console.log('Paginations not created, creating...');
           await axios
             .get(`${SERVER_URL}/create-paginations/`)
             .then((response_pagination) => {
@@ -494,7 +492,6 @@ export const createMovieRoutes = async (app) => {
   app.get('/get-page/:page', async (req, resp) => {
     const { page } = req.params;
 
-    console.log('get-page')
     const start = new Date();
 
     await axios
@@ -504,7 +501,6 @@ export const createMovieRoutes = async (app) => {
         let results = [];
 
         if (!res.data[0]) {
-          console.log('No global data found. Rebuilding...');
           await axios
             .get(SERVER_URL + '/update-global')
             .then((res) => {
@@ -587,8 +583,6 @@ export const createMovieRoutes = async (app) => {
             .delete(SERVER_URL + '/delete-pagination/' + page._id)
             .catch((err) => console.log(err));
         }
-
-        console.log('All paginations deleted');
       })
       .catch((err) => console.log(err));
     res.json({ message: 'All paginations deleted' });
@@ -650,7 +644,6 @@ export const createMovieRoutes = async (app) => {
             id_media_pages,
           })
             .then((res) => {
-              console.log('global updated');
               global = res.data;
             })
             .catch((err) => console.log(err));
@@ -692,7 +685,6 @@ export const createMovieRoutes = async (app) => {
         for (let global of res.data) {
           axios
             .delete(SERVER_URL + '/delete-global/' + global._id)
-            .then((res) => console.log('global deleted', res.data))
             .catch((err) => console.log(err));
         }
       })
